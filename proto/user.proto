@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package gotest;
+package basego;
 
 service CrudUser {
     rpc CreateNewUser(UserInput) returns(UserResponse);

@@ -1,10 +1,10 @@
-package gotest
+package basego
 
 import (
 	"context"
 	"encoding/json"
-	"github.com/micro/go-micro/v2"
-	proto "gotest/service"
+	"github.com/micro/go-micro"
+	proto "basego/service"
 	"time"
 )
 
@@ -112,7 +112,7 @@ func (api *Api) GetUser(ctx context.Context,req *proto.UserID,res *proto.UserRes
 
 
 func (api *Api) ConnectWithGRPC() error {
-	service :=  micro.NewService(micro.Name("proto"))
+	service :=  micro.NewService(micro.Name("Api"))
 	service.Init()
 
 	if err := proto.RegisterCrudUserHandler(service.Server(), new(Api)); err != nil {

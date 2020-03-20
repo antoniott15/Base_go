@@ -1,4 +1,4 @@
-package gotest
+package basego
 
 import (
 	"time"

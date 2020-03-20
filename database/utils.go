@@ -3,12 +3,12 @@ package database
 import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"gotest"
+	"basego"
 	"github.com/rs/xid"
 	"time"
 )
 
-func (r *Repository) CreateNewUser(user *gotest.User) error {
+func (r *Repository) CreateNewUser(user *basego.User) error {
 	if user.ID == "" {
 		user.ID = xid.New().String()
 	}
@@ -24,8 +24,8 @@ func (r *Repository) CreateNewUser(user *gotest.User) error {
 }
 
 
-func (r *Repository) GetUserByID(id string) (*gotest.User, error) {
-	user := new (gotest.User)
+func (r *Repository) GetUserByID(id string) (*basego.User, error) {
+	user := new (basego.User)
 
 	if err := r.user.FindOne(context.Background(), bson.M{"id": id}).Decode(user); err != nil {
 		return nil, err
@@ -35,16 +35,16 @@ func (r *Repository) GetUserByID(id string) (*gotest.User, error) {
 }
 
 
-func (r *Repository) AllUsers() ([]*gotest.User, error) {
+func (r *Repository) AllUsers() ([]*basego.User, error) {
 
 	iter, err := r.user.Find(context.Background(), bson.M{})
 	if err != nil {
 		 return nil,err
 	}
 
-	users := make([]*gotest.User, 0)
+	users := make([]*basego.User, 0)
 	for iter.Next(context.Background()) {
-		user := new (gotest.User)
+		user := new (basego.User)
 		if err := iter.Decode(user); err != nil {
 			m := bson.M{}
 			if err := iter.Decode(&m); err != nil {
@@ -62,7 +62,7 @@ func (r *Repository) AllUsers() ([]*gotest.User, error) {
 
 
 
-func (r *Repository) UpdateUserByID(user *gotest.User) error {
+func (r *Repository) UpdateUserByID(user *basego.User) error {
 
 	_, err := r.user.UpdateOne(context.Background(),bson.M{"id": user.ID}, user)
 	if err != nil {

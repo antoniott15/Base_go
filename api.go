@@ -1,6 +1,8 @@
-package gotest
+package basego
 
 import "github.com/gin-gonic/gin"
+
+
 
 type Api struct {
 	engine *gin.Engine
