@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package gotest;
+
+service CrudUser {
+    rpc CreateNewUser(UserInput) returns(UserResponse);
+    rpc DeleteUser(UserID) returns (Response);
+    rpc UpdateUser(UserInput) returns (Response);
+    rpc GetUser(UserID) returns(UserResponse);
+}
+
+message UserInput{
+    string username = 1;
+    string password = 2;
+    string name = 3;
+    string lastName = 4;
+    string phone = 5;
+    string address = 6;
+    string dni = 7;
+}
+
+message Response{
+    string message = 1;
+}
+
+message UserResponse{
+    UserInput user = 1;
+}
+
+
+message UserID {
+    string id = 1;
+}
